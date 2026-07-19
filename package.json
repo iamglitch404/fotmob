@@ -1,6 +1,6 @@
 {
   "name": "@iamglitch404/fotmob",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Fotmob API wrapper",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -12,7 +12,14 @@
     "fotmob",
     "football",
     "soccer",
-    "api"
+    "api",
+    "sports",
+    "live-scores",
+    "matches",
+    "leagues",
+    "transfers",
+    "football-data",
+    "wrapper"
   ],
   "author": "iamglitch404",
   "license": "MIT",

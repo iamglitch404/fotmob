@@ -2,13 +2,7 @@ import { HttpClient } from '../utils/httpClient';
 import { Endpoints } from '../constants/endpoints';
 import type { MatchesOptions, MatchesResponse } from '../types/matches.types';
 
-export class MatchesService {
-  /**
-   * Fetches matches/fixtures for a specific date.
-   * @param options Configuration for fetching matches.
-   * @returns A promise resolving to the matches payload grouped by league.
-   */
-  static async getMatches(options: MatchesOptions): Promise<MatchesResponse> {
+export const getMatches = async (options: MatchesOptions): Promise<MatchesResponse> => {
     const params: Record<string, string> = {
       date: options.date,
     };
@@ -21,4 +15,3 @@ export class MatchesService {
 
     return HttpClient.get<MatchesResponse>(Endpoints.MATCHES, params);
   }
-}

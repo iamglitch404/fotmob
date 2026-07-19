@@ -1,9 +1,17 @@
 {
   "name": "@iamglitch404/fotmob",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Fotmob API wrapper",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/iamglitch404/fotmob.git"
+  },
+  "bugs": {
+    "url": "https://github.com/iamglitch404/fotmob/issues"
+  },
+  "homepage": "https://github.com/iamglitch404/fotmob#readme",
   "scripts": {
     "build": "tsc",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -19,7 +27,26 @@
     "leagues",
     "transfers",
     "football-data",
-    "wrapper"
+    "wrapper",
+    "futbol",
+    "premier-league",
+    "la-liga",
+    "champions-league",
+    "fifa",
+    "uefa",
+    "soccer-api",
+    "football-api",
+    "match-stats",
+    "player-stats",
+    "epl",
+    "serie-a",
+    "bundesliga",
+    "ligue-1",
+    "livescore",
+    "sports-api",
+    "team-of-the-week",
+    "standings",
+    "fixtures"
   ],
   "author": "iamglitch404",
   "license": "MIT",

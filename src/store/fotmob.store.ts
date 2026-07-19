@@ -1,13 +1,20 @@
 import { createStore } from 'zustand/vanilla';
-import { TvListingsService } from '../services/tvlistings.service';
-import { NewsService } from '../services/news.service';
-import { TransfersService } from '../services/transfers.service';
-import { TableService } from '../services/table.service';
-import { MatchesService } from '../services/matches.service';
-import { LeaguesService } from '../services/leagues.service';
-import { AudioService } from '../services/audio.service';
-import { AllLeaguesService } from '../services/allLeagues.service';
-import { TopScorersService } from '../services/topScorers.service';
+import { getAllLeagues } from '../services/allLeagues.service';
+import { getAudioMatches } from '../services/audio.service';
+import { getLeagueDetails } from '../services/leagues.service';
+import { getLiveFixtures } from '../services/liveFixtures.service';
+import { getMatch } from '../services/match.service';
+import { getMatches } from '../services/matches.service';
+import { getTrending, getTimelineNews } from '../services/news.service';
+import { getPlayerDetails, getPlayerImageUrl } from '../services/player.service';
+import { getSearchSuggestions } from '../services/search.service';
+import { getLeagueTable } from '../services/table.service';
+import { getTeamDetails, getTeamLogoUrl } from '../services/team.service';
+import { getTopScorers } from '../services/topScorers.service';
+import { getTeamOfTheWeek, getTeamOfTheWeekRounds } from '../services/totw.service';
+import { getTopTransfers } from '../services/transfers.service';
+import { getListings } from '../services/tvlistings.service';
+
 
 import type { TvListingOptions, TvListingResponse } from '../types/tvlistings.types';
 import type { TrendingNewsOptions, TrendingNewsResponse, TimelineNewsOptions, TimelineNewsResponse } from '../types/news.types';
@@ -123,7 +130,7 @@ export const useFotmobStore = createStore<FotmobState>((set) => ({
   fetchTvListings: async (options) => {
     set({ isLoading: true, error: null });
     try {
-      const data = await TvListingsService.getListings(options);
+      const data = await getListings(options);
       set({ tvListings: data, isLoading: false });
     } catch (err: any) {
       set({ error: err instanceof Error ? err.message : 'Unknown error', isLoading: false });
@@ -135,7 +142,7 @@ export const useFotmobStore = createStore<FotmobState>((set) => ({
   fetchTrendingNews: async (options) => {
     set({ isLoading: true, error: null });
     try {
-      const data = await NewsService.getTrending(options);
+      const data = await getTrending(options);
       set({ trendingNews: data, isLoading: false });
     } catch (err: any) {
       set({ error: err instanceof Error ? err.message : 'Unknown error', isLoading: false });
@@ -147,7 +154,7 @@ export const useFotmobStore = createStore<FotmobState>((set) => ({
   fetchTimelineNews: async (options) => {
     set({ isLoading: true, error: null });
     try {
-      const data = await NewsService.getTimelineNews(options);
+      const data = await getTimelineNews(options);
       set({ timelineNews: data, isLoading: false });
     } catch (err: any) {
       set({ error: err instanceof Error ? err.message : 'Unknown error', isLoading: false });
@@ -159,7 +166,7 @@ export const useFotmobStore = createStore<FotmobState>((set) => ({
   fetchTopTransfers: async (options) => {
     set({ isLoading: true, error: null });
     try {
-      const data = await TransfersService.getTopTransfers(options);
+      const data = await getTopTransfers(options);
       set({ topTransfers: data, isLoading: false });
     } catch (err: any) {
       set({ error: err instanceof Error ? err.message : 'Unknown error', isLoading: false });
@@ -171,7 +178,7 @@ export const useFotmobStore = createStore<FotmobState>((set) => ({
   fetchLeagueTable: async (options) => {
     set({ isLoading: true, error: null });
     try {
-      const data = await TableService.getLeagueTable(options);
+      const data = await getLeagueTable(options);
       set({ leagueTable: data, isLoading: false });
     } catch (err: any) {
       set({ error: err instanceof Error ? err.message : 'Unknown error', isLoading: false });
@@ -183,7 +190,7 @@ export const useFotmobStore = createStore<FotmobState>((set) => ({
   fetchMatches: async (options) => {
     set({ isLoading: true, error: null });
     try {
-      const data = await MatchesService.getMatches(options);
+      const data = await getMatches(options);
       set({ matches: data, isLoading: false });
     } catch (err: any) {
       set({ error: err instanceof Error ? err.message : 'Unknown error', isLoading: false });
@@ -195,7 +202,7 @@ export const useFotmobStore = createStore<FotmobState>((set) => ({
   fetchLeagueDetails: async (options) => {
     set({ isLoading: true, error: null });
     try {
-      const data = await LeaguesService.getLeagueDetails(options);
+      const data = await getLeagueDetails(options);
       set({ leagueDetails: data, isLoading: false });
     } catch (err: any) {
       set({ error: err instanceof Error ? err.message : 'Unknown error', isLoading: false });
@@ -207,7 +214,7 @@ export const useFotmobStore = createStore<FotmobState>((set) => ({
   fetchAudioMatches: async () => {
     set({ isLoading: true, error: null });
     try {
-      const data = await AudioService.getAudioMatches();
+      const data = await getAudioMatches();
       set({ audioMatches: data, isLoading: false });
     } catch (err: any) {
       set({ error: err instanceof Error ? err.message : 'Unknown error', isLoading: false });
@@ -219,7 +226,7 @@ export const useFotmobStore = createStore<FotmobState>((set) => ({
   fetchAllLeagues: async (options) => {
     set({ isLoading: true, error: null });
     try {
-      const data = await AllLeaguesService.getAllLeagues(options);
+      const data = await getAllLeagues(options);
       set({ allLeagues: data, isLoading: false });
     } catch (err: any) {
       set({ error: err instanceof Error ? err.message : 'Unknown error', isLoading: false });
@@ -231,7 +238,7 @@ export const useFotmobStore = createStore<FotmobState>((set) => ({
   fetchTopScorers: async (options) => {
     set({ isLoading: true, error: null });
     try {
-      const data = await TopScorersService.getTopScorers(options);
+      const data = await getTopScorers(options);
       set({ topScorers: data, isLoading: false });
     } catch (err: any) {
       set({ error: err instanceof Error ? err.message : 'Unknown error', isLoading: false });
@@ -243,7 +250,7 @@ export const useFotmobStore = createStore<FotmobState>((set) => ({
   fetchTeamOfTheWeek: async (options) => {
     set({ isLoading: true, error: null });
     try {
-      const data = (await import('../services/totw.service')).TeamOfTheWeekService.getTeamOfTheWeek(options);
+      const data = (await import('../services/totw.service')).getTeamOfTheWeek(options);
       set({ teamOfTheWeek: await data, isLoading: false });
     } catch (err: any) {
       set({ error: err instanceof Error ? err.message : 'Unknown error', isLoading: false });
@@ -255,7 +262,7 @@ export const useFotmobStore = createStore<FotmobState>((set) => ({
   fetchTeamOfTheWeekRounds: async (options) => {
     set({ isLoading: true, error: null });
     try {
-      const data = (await import('../services/totw.service')).TeamOfTheWeekService.getTeamOfTheWeekRounds(options);
+      const data = (await import('../services/totw.service')).getTeamOfTheWeekRounds(options);
       set({ teamOfTheWeekRounds: await data, isLoading: false });
     } catch (err: any) {
       set({ error: err instanceof Error ? err.message : 'Unknown error', isLoading: false });
@@ -267,7 +274,7 @@ export const useFotmobStore = createStore<FotmobState>((set) => ({
   fetchLiveFixtures: async (options) => {
     set({ isLoading: true, error: null });
     try {
-      const data = (await import('../services/liveFixtures.service')).LiveFixturesService.getLiveFixtures(options);
+      const data = (await import('../services/liveFixtures.service')).getLiveFixtures(options);
       set({ liveFixtures: await data, isLoading: false });
     } catch (err: any) {
       set({ error: err instanceof Error ? err.message : 'Unknown error', isLoading: false });
@@ -279,7 +286,7 @@ export const useFotmobStore = createStore<FotmobState>((set) => ({
   fetchPlayerDetails: async (options) => {
     set({ isLoading: true, error: null });
     try {
-      const data = (await import('../services/player.service')).PlayerService.getPlayerDetails(options);
+      const data = (await import('../services/player.service')).getPlayerDetails(options);
       set({ playerDetails: await data, isLoading: false });
     } catch (err: any) {
       set({ error: err instanceof Error ? err.message : 'Unknown error', isLoading: false });
@@ -291,7 +298,7 @@ export const useFotmobStore = createStore<FotmobState>((set) => ({
   fetchSearchData: async (options) => {
     set({ isLoading: true, error: null });
     try {
-      const data = (await import('../services/search.service')).SearchService.getSearchSuggestions(options);
+      const data = (await import('../services/search.service')).getSearchSuggestions(options);
       set({ searchData: await data, isLoading: false });
     } catch (err: any) {
       set({ error: err instanceof Error ? err.message : 'Unknown error', isLoading: false });
@@ -303,7 +310,7 @@ export const useFotmobStore = createStore<FotmobState>((set) => ({
   fetchTeamDetails: async (options) => {
     set({ isLoading: true, error: null });
     try {
-      const data = (await import('../services/team.service')).TeamService.getTeamDetails(options);
+      const data = (await import('../services/team.service')).getTeamDetails(options);
       set({ teamDetails: await data, isLoading: false });
     } catch (err: any) {
       set({ error: err instanceof Error ? err.message : 'Unknown error', isLoading: false });
@@ -315,7 +322,7 @@ export const useFotmobStore = createStore<FotmobState>((set) => ({
   fetchMatch: async (options) => {
     set({ isLoading: true, error: null });
     try {
-      const data = (await import('../services/match.service')).MatchService.getMatch(options);
+      const data = (await import('../services/match.service')).getMatch(options);
       set({ matchData: await data, isLoading: false });
     } catch (err: any) {
       set({ error: err instanceof Error ? err.message : 'Unknown error', isLoading: false });
